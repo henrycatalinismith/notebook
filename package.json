@@ -1,0 +1,13 @@
+{
+  "name": "@hendotcat/notebook",
+  "homepage": "https://hen.cat/notebook/",
+  "author": {
+    "name": "Henry Catalini Smith",
+    "email": "hen@hey.com",
+    "url": "https://hen.cat/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hendotcat/notebook.git"
+  }
+}
