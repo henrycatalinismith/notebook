@@ -1,5 +1,7 @@
 .DS_Store
 node_modules
+_data
+_includes
 _site
 yarn.lock
 

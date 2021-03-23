@@ -1,3 +1,6 @@
+---
+title: notebook
+---
 <!doctype html>
 <html
   lang="en"
@@ -21,7 +24,19 @@
   </head>
   <body>
     <main>
-      notebook
+      {{ title }}
+
+      <ol>
+        {%- for note in collections.all -%}
+          {% if note.data.layout == "note" and note.data.name %}
+            <li>
+              <a href="{{ note.fileSlug }}">
+                {{ note.data.name }}
+              </a>
+            </li>
+          {% endif %}
+        {%- endfor -%}
+      </ol>
     </main>
   </body>
 </html>
