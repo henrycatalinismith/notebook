@@ -10,15 +10,24 @@
       name="viewport"
       content="width=device-width, initial-scale=1"
     />
+    <style>
+      {% include "note.css" %}
+    </style>
   </head>
   <body>
-    <h1>
-      {{ name }}
-    </h1>
-    <time>
-      {{ date }}
-    </time>
-    {{ content | safe }}
+    <main>
+      <article>
+        <header>
+          <h1>
+            {{ name }}
+          </h1>
+          <time>
+            {{ date | iso8601 }}
+          </time>
+        </header>
+        {{ content | safe }}
+      </article>
+    </main>
   </body>
 </html>
 

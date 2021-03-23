@@ -1,0 +1,59 @@
+:root {
+  --padding: 0.5rem;
+  --tiny: calc(100vw - var(--padding) * 2);
+  --wide: 32rem;
+  --box: min(var(--tiny), var(--wide));
+  --edge: calc((100vw - var(--box)) / 2);
+}
+
+html {
+  box-sizing: border-box;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  background: azure;
+  margin: 0;
+}
+
+main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+article {
+  width: var(--box);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+  width: var(--box);
+}
+
+h1 {
+  margin: 0;
+}
+
+h1, time {
+  font-family: Futura, sans-serif;
+  font-family: Menlo, monospace;
+  font-size: 2rem;
+  font-size: 1.2rem;
+}
+
+p {
+  font-family: Menlo, monospace;
+  font-size: 1.2rem;
+}
+
+

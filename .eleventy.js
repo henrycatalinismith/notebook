@@ -11,9 +11,25 @@ fs.writeFileSync(
 module.exports = function(eleventyConfig) {
   console.log("notebook")
 
+  eleventyConfig.addFilter(
+    "iso8601",
+    function(d) {
+      const date = new Date(d)
+      return [
+        date.getFullYear(),
+        "-",
+        (date.getMonth() + 1).toString().padStart(2, "0"),
+        "-",
+        date.getDate(),
+      ].join("")
+    }
+  )
+
   eleventyConfig.addLayoutAlias(
     "note",
     "../note.njk"
   )
+
+  eleventyConfig.addWatchTarget("note.css")
 }
 
