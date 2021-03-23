@@ -9,5 +9,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/hendotcat/notebook.git"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^0.12.1"
   }
 }
