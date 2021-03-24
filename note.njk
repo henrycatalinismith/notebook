@@ -21,11 +21,13 @@
           <h1>
             {{ name }}
           </h1>
+        </header>
+        {{ content | safe }}
+        <footer>
           <time>
             {{ date | iso8601 }}
           </time>
-        </header>
-        {{ content | safe }}
+        </footer>
       </article>
     </main>
   </body>

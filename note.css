@@ -4,6 +4,33 @@
   --wide: 32rem;
   --box: min(var(--tiny), var(--wide));
   --edge: calc((100vw - var(--box)) / 2);
+
+  --titleFontSize: 1rem;
+  --dateFontSize: 1rem;
+}
+
+@media (min-width: 16rem) {
+  :root {
+    --titleFontSize: 1.5rem;
+  }
+}
+
+@media (min-width: 20rem) {
+  :root {
+    --titleFontSize: 1.9rem;
+  }
+}
+
+@media (min-width: 24rem) {
+  :root {
+    --titleFontSize: 2.4rem;
+  }
+}
+
+@media (min-width: 32rem) {
+  :root {
+    --titleFontSize: 3rem;
+  }
 }
 
 html {
@@ -19,7 +46,6 @@ html {
 }
 
 body {
-  background: azure;
   margin: 0;
 }
 
@@ -35,20 +61,21 @@ article {
 
 header {
   display: flex;
-  justify-content: space-between;
-  padding: 1rem 0;
+  flex-direction: column;
+  justify-content: center;
+  height: var(--box);
   width: var(--box);
 }
 
 h1 {
-  margin: 0;
+  font-family: Futura, sans-serif;
+  font-size: var(--titleFontSize);
+  margin: 0 0 1rem 0;
 }
 
-h1, time {
-  font-family: Futura, sans-serif;
+time {
   font-family: Menlo, monospace;
-  font-size: 2rem;
-  font-size: 1.2rem;
+  font-size: var(--dateFontSize);
 }
 
 p {
@@ -56,4 +83,11 @@ p {
   font-size: 1.2rem;
 }
 
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: var(--box);
+  width: var(--box);
+}
 
