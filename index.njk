@@ -26,13 +26,12 @@ layout:
   <body>
     <main>
       {{ title }}
-      {{ layout2 }}
 
       <ol>
         {%- for note in collections.all -%}
           {% if note.data.layout == "note" and note.data.name %}
             <li>
-              <a href="{{ note.fileSlug }}">
+              <a href="./{{ note.fileSlug }}">
                 {{ note.data.name }}
               </a>
             </li>
