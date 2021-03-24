@@ -107,7 +107,7 @@ pre > code {
   font-family: Monaco, monospace;
   font-size: 1rem;
   font-weight: bold;
-  width: var(--box);
+  min-width: var(--box);
 }
 
 footer {
