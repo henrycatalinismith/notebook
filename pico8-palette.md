@@ -16,10 +16,10 @@ td {
   font-weight: bold;
   text-align: center;
   text-shadow:
-    -0.1em  0.1em 0.1em black,
-     0.1em -0.1em 0.1em black,
-    -0.1em -0.1em 0.1em black,
-     0.1em  0.1em 0.1em black;
+    -0.1em  0.1em 0.2em black,
+     0.1em -0.1em 0.2em black,
+    -0.1em -0.1em 0.2em black,
+     0.1em  0.1em 0.2em black;
   width: 25%;
 }
 
