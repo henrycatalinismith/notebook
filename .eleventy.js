@@ -1,17 +1,12 @@
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight")
 const fs = require("fs-extra")
+const sass = require("sass")
 
 fs.ensureDirSync("_data")
 fs.ensureDirSync("_includes")
 
 module.exports = function(eleventyConfig) {
   console.log("notebook")
-
-  eleventyConfig.addGlobalData(
-    "layout",
-    function(e) {
-      return "note"
-    }
-  )
 
   eleventyConfig.addFilter(
     "iso8601",
@@ -27,11 +22,15 @@ module.exports = function(eleventyConfig) {
     }
   )
 
-  eleventyConfig.addLayoutAlias(
-    "note",
-    "../note.njk"
+  eleventyConfig.addGlobalData(
+    "css",
+    function() {
+      return sass.renderSync({ file: "style.scss" }).css
+    }
   )
 
-  eleventyConfig.addWatchTarget("note.css")
+  eleventyConfig.addPlugin(syntaxHighlight)
+
+  eleventyConfig.addWatchTarget("style.scss")
 }
 

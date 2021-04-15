@@ -11,7 +11,7 @@
       content="width=device-width, initial-scale=1"
     />
     <style>
-      {% include "note.css" %}
+      {{ css | safe }}
     </style>
   </head>
   <body>
@@ -21,6 +21,9 @@
           <h1>
             {{ name }}
           </h1>
+          <p>
+            {{ description }}
+          </p>
         </header>
         {{ content | safe }}
         <footer>
