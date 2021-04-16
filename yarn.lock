@@ -71,10 +71,10 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@hendotcat/picknmix@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@hendotcat/picknmix/-/picknmix-0.0.7.tgz#2f303c3e3fb3d2a9825b4c9d44ae556a90cea61b"
-  integrity sha512-FBufmhjk0976mhIDya0U4+rK8/0g7zTnXnoSXvNgBKHtg6NiWK8uA711v8grkgkK11953U2+yz7WTNYlOowSDA==
+"@hendotcat/picknmix@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@hendotcat/picknmix/-/picknmix-0.0.8.tgz#f82c0b266ab2961cfea25041369b304767a39fd1"
+  integrity sha512-V0Rc6F7BOh4HFjArfsC9kzqveOXHWf8n2/IVMmSA7+FXEpU+y4ylujFK2QSmyf7nQ2oNi8L9sFDtOpTZPtsySg==
 
 "@nodelib/fs.scandir@2.1.4":
   version "2.1.4"
