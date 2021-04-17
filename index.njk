@@ -19,25 +19,39 @@ layout:
       content="width=device-width, initial-scale=1"
     />
 
+    <style>
+      {{ css | safe }}
+    </style>
+
     <title>
       notebook
     </title>
   </head>
   <body>
     <main>
-      {{ title }}
+      <article>
+        <header>
+          <h1>
+            {{ title }}
+          </h1>
+        </header>
 
-      <ol>
-        {%- for note in collections.all -%}
-          {% if note.data.layout == "note" and note.data.name %}
-            <li>
-              <a href="./{{ note.fileSlug }}">
-                {{ note.data.name }}
-              </a>
-            </li>
-          {% endif %}
-        {%- endfor -%}
-      </ol>
+        <dl>
+          {% for note in collections.all %}
+            {% if note.data.layout == "note" and note.data.name %}
+              <dt>
+                <a href="/{{ note.fileSlug }}">
+                  {{ note.data.name }}
+                </a>
+              </dt>
+              <dd>
+                {{ note.data.description }}
+              </dd>
+            {% endif %}
+          {% endfor %}
+        </dl>
+
+      </article>
     </main>
   </body>
 </html>
