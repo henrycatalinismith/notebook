@@ -29,6 +29,7 @@ module.exports = function(eleventyConfig) {
     }
   )
 
+  eleventyConfig.addPassthroughCopy("notebook.svg")
   eleventyConfig.addPlugin(syntaxHighlight)
 
   eleventyConfig.addWatchTarget("style.scss")
