@@ -29,29 +29,28 @@ layout:
   </head>
   <body>
     <main>
-      <article>
-        <header>
-          <h1>
-            {{ title }}
-          </h1>
-        </header>
 
-        <dl>
-          {% for note in collections.all %}
-            {% if note.data.layout == "note" and note.data.name %}
-              <dt>
-                <a href="/{{ note.fileSlug }}">
-                  {{ note.data.name }}
-                </a>
-              </dt>
-              <dd>
-                {{ note.data.description }}
-              </dd>
-            {% endif %}
-          {% endfor %}
-        </dl>
+      <header>
+        <h1>
+          {{ title }}
+        </h1>
+      </header>
 
-      </article>
+      <dl>
+        {% for note in collections.all %}
+          {% if note.data.layout == "note" and note.data.name %}
+            <dt>
+              <a href="/{{ note.fileSlug }}">
+                {{ note.data.name }}
+              </a>
+            </dt>
+            <dd>
+              {{ note.data.description }}
+            </dd>
+          {% endif %}
+        {% endfor %}
+      </dl>
+
     </main>
   </body>
 </html>

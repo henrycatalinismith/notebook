@@ -7,7 +7,7 @@ date: 2021-03-25
 <style>
 table {
   border-collapse: collapse;
-  width: var(--box);
+  width: var(--column);
 }
 
 td {
