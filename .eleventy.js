@@ -1,5 +1,5 @@
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight")
-const rehype = require("@hendotcat/11tyhype")
+const { rehypePlugin } = require("@hendotcat/11tyhype")
 const { sassPlugin } = require("@hendotcat/11tysass")
 const rehypeMinifyWhitespace = require("rehype-minify-whitespace")
 const fs = require("fs-extra")
@@ -27,7 +27,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("notebook.svg")
   eleventyConfig.addPlugin(syntaxHighlight)
 
-  eleventyConfig.addPlugin(rehype, {
+  eleventyConfig.addPlugin(rehypePlugin, {
     plugins: [
       [rehypeMinifyWhitespace],
     ]
