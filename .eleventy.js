@@ -1,6 +1,6 @@
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight")
 const rehype = require("@hendotcat/11tyhype")
-const sass = require("@hendotcat/11tysass")
+const { sassPlugin } = require("@hendotcat/11tysass")
 const rehypeMinifyWhitespace = require("rehype-minify-whitespace")
 const fs = require("fs-extra")
 
@@ -33,10 +33,11 @@ module.exports = function(eleventyConfig) {
     ]
   })
 
-  eleventyConfig.addPlugin(sass, {
+  eleventyConfig.addPlugin(sassPlugin, {
     files: [{
       alias: "css",
       file: "style.scss",
+      outputStyle: "compressed",
     }],
   })
 
