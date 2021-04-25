@@ -2,6 +2,7 @@ const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight")
 const { rehypePlugin } = require("@hendotcat/11tyhype")
 const { sassPlugin } = require("@hendotcat/11tysass")
 const rehypeMinifyWhitespace = require("rehype-minify-whitespace")
+const rehypeUrls = require("rehype-urls")
 const fs = require("fs-extra")
 
 fs.ensureDirSync("_data")
@@ -27,20 +28,25 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("notebook.svg")
   eleventyConfig.addPlugin(syntaxHighlight)
 
+  const siteUrl = process.env.CI ? "https://hen.cat/notebook/" : ""
+
   eleventyConfig.addPlugin(rehypePlugin, {
     plugins: [
       [rehypeMinifyWhitespace],
+      [rehypeUrls, url => {
+        if (url.href.startsWith("/")) {
+          return `${siteUrl}${url.href}`
+        }
+      }],
     ]
   })
 
   eleventyConfig.addPlugin(sassPlugin, {
     files: [{
-      alias: "css",
       file: "style.scss",
+      outFile: "style.css",
       outputStyle: "compressed",
     }],
   })
-
-  eleventyConfig.addWatchTarget("style.scss")
 }
 
