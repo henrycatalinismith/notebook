@@ -2,6 +2,10 @@
 
 @include picknmix.theme;
 
+body {
+  // background: blue;
+}
+
 .hero {
   display: grid;
   row-gap: 1rem;

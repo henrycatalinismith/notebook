@@ -1,6 +1,9 @@
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight")
 const { rehypePlugin } = require("@hendotcat/11tyhype")
 const { sassPlugin } = require("@hendotcat/11tysass")
+const autoprefixer = require("autoprefixer")
+const postcss = require("postcss")
+const clean = require("postcss-clean")
 const rehypeMinifyWhitespace = require("rehype-minify-whitespace")
 const rehypeUrls = require("rehype-urls")
 const fs = require("fs-extra")
@@ -44,9 +47,14 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(sassPlugin, {
     files: [{
       file: "style.scss",
-      outFile: "style.css",
+      outFile: "style.[hash].css",
       outputStyle: "compressed",
     }],
+    plugins: [
+      // css => postcss([autoprefixer]).process(css).css,
+      // css => { throw new Error("lol") },
+    ],
+    verbose: true,
   })
 }
 
