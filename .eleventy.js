@@ -33,17 +33,6 @@ module.exports = function(eleventyConfig) {
 
   const siteUrl = process.env.CI ? "https://hen.cat/notebook/" : ""
 
-  eleventyConfig.addPlugin(rehypePlugin, {
-    plugins: [
-      [rehypeMinifyWhitespace],
-      [rehypeUrls, url => {
-        if (url.href.startsWith("/")) {
-          return `${siteUrl}${url.href}`
-        }
-      }],
-    ]
-  })
-
   eleventyConfig.addPlugin(sassPlugin, {
     files: [{
       file: "style.scss",
@@ -55,6 +44,17 @@ module.exports = function(eleventyConfig) {
       // css => { throw new Error("lol") },
     ],
     verbose: true,
+  })
+
+  eleventyConfig.addPlugin(rehypePlugin, {
+    plugins: [
+      [rehypeMinifyWhitespace],
+      [rehypeUrls, url => {
+        if (url.href.startsWith("/")) {
+          return `${siteUrl}${url.href}`
+        }
+      }],
+    ]
   })
 }
 
