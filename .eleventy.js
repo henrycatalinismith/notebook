@@ -1,15 +1,13 @@
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight")
 const { rehypePlugin } = require("@hendotcat/11tyhype")
 const { sassPlugin } = require("@hendotcat/11tysass")
-const autoprefixer = require("autoprefixer")
-const postcss = require("postcss")
-const clean = require("postcss-clean")
+const { reactPlugin } = require("@hendotcat/11tysnap")
+const { register } = require("esbuild-register/dist/node")
 const rehypeMinifyWhitespace = require("rehype-minify-whitespace")
 const rehypeUrls = require("rehype-urls")
 const fs = require("fs-extra")
 
-fs.ensureDirSync("_data")
-fs.ensureDirSync("_includes")
+register()
 
 module.exports = function(eleventyConfig) {
   console.log("notebook")
@@ -46,6 +44,10 @@ module.exports = function(eleventyConfig) {
     verbose: true,
   })
 
+  eleventyConfig.addPlugin(reactPlugin, {
+    verbose: true,
+  })
+
   eleventyConfig.addPlugin(rehypePlugin, {
     plugins: [
       [rehypeMinifyWhitespace],
@@ -56,5 +58,14 @@ module.exports = function(eleventyConfig) {
       }],
     ]
   })
+
+  const dir = {
+    includes: "_includes",
+    layouts: "_layouts",
+  }
+
+  return {
+    dir,
+  }
 }
 
