@@ -1,7 +1,10 @@
 import React from "react"
 import DefinitionList from "../_includes/definition-list"
 
-export default function Index(props: any): React.ReactElement {
+export default function Home({
+  collections,
+  title,
+}: Layout<Home>): React.ReactElement {
   return (
     <html
       lang="en"
@@ -16,7 +19,7 @@ export default function Index(props: any): React.ReactElement {
           rel="stylesheet"
           href="style.scss"
         />
-        <title>{props.title}</title>
+        <title>{title}</title>
       </head>
       <body>
         <main>
@@ -24,7 +27,7 @@ export default function Index(props: any): React.ReactElement {
           <header className="hero">
 
             <h1>
-              <span>{props.title}</span>
+              <span>{title}</span>
               <svg xmlns="http://www.w3.org/2000/svg" strokeLinecap="round" strokeLinejoin="round" viewBox="-2 0 41 8">
                 <g fill="none">
                   <path stroke="#000" strokeWidth="2.8" d="M0 6V3h1l1 1v2"/>
@@ -63,7 +66,7 @@ export default function Index(props: any): React.ReactElement {
           </header>
 
           <DefinitionList
-            items={props.collections.all.filter(n => !!n.data.name).map(note => ({
+            items={collections.notes.filter(n => !!n.data.name).map(note => ({
               termHref: `/${note.fileSlug}`,
               termText: note.data.name,
               detailsText: note.data.description

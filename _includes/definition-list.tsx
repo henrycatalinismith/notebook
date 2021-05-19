@@ -9,7 +9,6 @@ interface DefinitionListProps {
 }
 
 export default function DefinitionList({ items }: DefinitionListProps): React.ReactElement {
-  console.log(items)
   return (
     <dl>
       {items.map(item => (

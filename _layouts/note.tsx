@@ -1,6 +1,11 @@
 import React from "react"
 
-export default function Note(props: any): React.ReactElement {
+export default function Note({
+  name,
+  description,
+  content,
+  date,
+}: Layout<Note>): React.ReactElement {
   return (
     <html lang="en" dir="ltr">
       <head>
@@ -11,7 +16,7 @@ export default function Note(props: any): React.ReactElement {
         />
         <link
           rel="canonical"
-          href={`https://hen.cat/notebook/${props.name}`}
+          href={`https://hen.cat/notebook/${name}`}
         />
         <link
           rel="stylesheet"
@@ -23,14 +28,14 @@ export default function Note(props: any): React.ReactElement {
         <article>
           <header>
             <h1>
-              {props.name}
+              {name}
             </h1>
             <p>
-              {props.description}
+              {description}
             </p>
           </header>
 
-          <section dangerouslySetInnerHTML={{ __html: props.content }} />
+          <section dangerouslySetInnerHTML={{ __html: content }} />
 
           <footer>
             <p
@@ -44,8 +49,8 @@ export default function Note(props: any): React.ReactElement {
               </a>
             </p>
 
-            <time dateTime={props.date}>
-              {props.date.toISOString().substring(0, 10)}
+            <time dateTime={date.toISOString()}>
+              {date.toISOString().substring(0, 10)}
             </time>
           </footer>
 
