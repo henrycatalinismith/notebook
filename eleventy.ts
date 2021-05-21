@@ -3,7 +3,6 @@ import { rehypePlugin } from "@hendotcat/11tyhype"
 import { sassPlugin } from "@hendotcat/11tysass"
 import { reactPlugin } from "@hendotcat/11tysnap"
 import { EleventyCollection, EleventyLayout } from "@hendotcat/11tytype"
-import { register } from "esbuild-register/dist/node"
 import rehypeMinifyWhitespace from "rehype-minify-whitespace"
 import rehypeUrls from "rehype-urls"
 
@@ -23,10 +22,6 @@ declare global {
 
   type Layout<Template> = EleventyLayout<Template, Collections>
 }
-
-register()
-
-export {}
 
 module.exports = function(eleventyConfig) {
   console.log("notebook")
