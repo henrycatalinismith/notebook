@@ -1,27 +1,19 @@
+import { Body, CanonicalLink, Document, Head, StylesheetLink } from "@hendotcat/elements"
 import React from "react"
 import DefinitionList from "../_includes/definition-list"
 
 export default function Home({
   collections,
   title,
+  description,
 }: Layout<Home>): React.ReactElement {
   return (
-    <html
-      lang="en"
-      dir="ltr">
-      <head>
-        <meta charSet="utf-8" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1"
-        />
-        <link
-          rel="stylesheet"
-          href="style.scss"
-        />
-        <title>{title}</title>
-      </head>
-      <body>
+    <Document lang="en" title={title} description={description}>
+      <Head>
+        <CanonicalLink href="https://hen.cat/notebook" />
+        <StylesheetLink href="style.scss" />
+      </Head>
+      <Body>
         <main>
 
           <header className="hero">
@@ -78,7 +70,7 @@ export default function Home({
           </footer>
 
         </main>
-      </body>
-    </html>
+      </Body>
+    </Document>
   )
 }

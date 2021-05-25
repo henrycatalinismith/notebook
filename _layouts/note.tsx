@@ -1,3 +1,4 @@
+import { Body, CanonicalLink, Document, Head, StylesheetLink } from "@hendotcat/elements"
 import React from "react"
 
 export default function Note({
@@ -7,23 +8,12 @@ export default function Note({
   date,
 }: Layout<Note>): React.ReactElement {
   return (
-    <html lang="en" dir="ltr">
-      <head>
-        <meta charSet="utf-8" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1"
-        />
-        <link
-          rel="canonical"
-          href={`https://hen.cat/notebook/${name}`}
-        />
-        <link
-          rel="stylesheet"
-          href="style.scss"
-        />
-      </head>
-      <body>
+    <Document lang="en" title={name} description={description}>
+      <Head>
+        <CanonicalLink href={`https://hen.cat/notebook/${name}`} />
+        <StylesheetLink href="style.scss" />
+      </Head>
+      <Body>
 
         <article>
           <header>
@@ -55,7 +45,7 @@ export default function Note({
           </footer>
 
         </article>
-      </body>
-    </html>
+      </Body>
+    </Document>
   )
 }

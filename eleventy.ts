@@ -9,6 +9,7 @@ import rehypeUrls from "rehype-urls"
 declare global {
   interface Home {
     title: string
+    description: string
   }
 
   interface Note {
