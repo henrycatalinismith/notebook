@@ -1,6 +1,13 @@
-import { Body, CanonicalLink, Document, Head, StylesheetLink } from "@hendotcat/elements"
+import {
+  Anchor,
+  DescriptionList,
+  Body,
+  CanonicalLink,
+  Document,
+  Head,
+  StylesheetLink,
+} from "@hendotcat/elements"
 import React from "react"
-import DefinitionList from "../_includes/definition-list"
 
 export default function Home({
   collections,
@@ -57,12 +64,11 @@ export default function Home({
             </h1>
           </header>
 
-          <DefinitionList
-            items={collections.notes.filter(n => !!n.data.name).map(note => ({
-              termHref: `/${note.fileSlug}`,
-              termText: note.data.name,
-              detailsText: note.data.description
-            }))}
+          <DescriptionList
+            items={collections.notes.filter(n => !!n.data.name).map(note => [
+              <Anchor href={`/${note.fileSlug}`}>{note.data.name}</Anchor>,
+              note.data.description,
+            ])}
           />
 
           <footer>

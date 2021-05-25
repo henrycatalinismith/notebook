@@ -112,10 +112,10 @@
   resolved "https://registry.yarnpkg.com/@hendotcat/11tytype/-/11tytype-0.0.5.tgz#6236ee1b20481b5eb94473477f5ce50f6b1d89a1"
   integrity sha512-6hIARDgrwkKzt4cEwp+QYd2EH3VzT7EoHcivNadS5mxjJCFs2jJFsOeFkrB+4mr9lMt+Av28mGi80CC2Z8enHg==
 
-"@hendotcat/elements@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@hendotcat/elements/-/elements-0.0.2.tgz#fd0ffa68b4e3e021c6ca419e2841cba1573804e9"
-  integrity sha512-qC6dHWR2CNJemIruv82qPzLy5CjRYDwf3YMYJ1VLNXVScBh52EEqFNnNKhw+MByNXTGYmlUKz33oY2tJBUw0Gg==
+"@hendotcat/elements@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@hendotcat/elements/-/elements-0.0.3.tgz#3cb57a0c293fcc4026e9b0d61c9f611ab4a5adea"
+  integrity sha512-wXtcsQ6s0afHLjFHmT8zcbmqz7HDoCqvbMNugLewQCtBkYsWAPAKnKY4+XSZgxRSqAazLD52BcAk5R02RQSbQw==
 
 "@hendotcat/picknmix@^0.0.18":
   version "0.0.18"

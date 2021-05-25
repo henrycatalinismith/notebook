@@ -17,7 +17,7 @@
     "@hendotcat/11tysass": "^2.0.1",
     "@hendotcat/11tysnap": "^0.0.10",
     "@hendotcat/11tytype": "^0.0.5",
-    "@hendotcat/elements": "^0.0.2",
+    "@hendotcat/elements": "^0.0.3",
     "@hendotcat/picknmix": "^0.0.18",
     "@types/node": "^15.3.0",
     "@types/react": "^17.0.5",
