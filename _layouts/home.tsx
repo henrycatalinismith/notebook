@@ -1,8 +1,8 @@
 import {
   Anchor,
-  DescriptionList,
   Body,
   CanonicalLink,
+  DescriptionList,
   Document,
   Head,
   StylesheetLink,
