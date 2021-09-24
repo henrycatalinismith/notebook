@@ -5,6 +5,7 @@ import {
   DescriptionList,
   Document,
   Head,
+  Header,
   StylesheetLink,
 } from "@hendotcat/elements"
 import React from "react"
@@ -23,7 +24,7 @@ export default function Home({
       <Body>
         <main>
 
-          <header className="hero">
+          <Header className="hero">
 
             <h1>
               <span>{title}</span>
@@ -62,7 +63,7 @@ export default function Home({
                 </g>
               </svg>
             </h1>
-          </header>
+          </Header>
 
           <DescriptionList
             items={collections.notes.filter(n => !!n.data.name).map(note => [
@@ -72,7 +73,16 @@ export default function Home({
           />
 
           <footer>
-            Henry Catalini Smith
+            <p
+              itemProp="creator"
+              itemScope
+              itemType="http://schema.org/Person">
+              <a href="https://hen.cat/" target="_blank">
+                <span itemProp="name">
+                  Henry Catalini Smith
+                </span>
+              </a>
+            </p>
           </footer>
 
         </main>
