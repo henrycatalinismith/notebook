@@ -1,4 +1,4 @@
-import { Body, CanonicalLink, Document, Head, StylesheetLink } from "@hendotcat/elements"
+import { Body, CanonicalLink, Document, Head, StylesheetLink } from "@henrycatalinismith/elements"
 import React from "react"
 
 export default function Note({

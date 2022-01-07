@@ -7,7 +7,7 @@ import {
   Head,
   Header,
   StylesheetLink,
-} from "@hendotcat/elements"
+} from "@henrycatalinismith/elements"
 import React from "react"
 
 export default function Home({

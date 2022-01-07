@@ -1,9 +1,9 @@
 {
-  "name": "@hendotcat/notebook",
+  "name": "@henrycatalinismith/notebook",
   "homepage": "https://hen.cat/notebook/",
   "author": {
     "name": "Henry Catalini Smith",
-    "email": "smith@hen.cat",
+    "email": "henry@catalinismith.com",
     "url": "https://hen.cat/"
   },
   "repository": {
@@ -13,12 +13,12 @@
   "devDependencies": {
     "@11ty/eleventy": "^0.12.1",
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.1.0",
-    "@hendotcat/11tyhype": "^0.0.4",
-    "@hendotcat/11tysass": "^2.0.1",
-    "@hendotcat/11tysnap": "^0.0.10",
-    "@hendotcat/11tytype": "^0.0.5",
-    "@hendotcat/elements": "^0.0.5",
-    "@hendotcat/picknmix": "^0.0.20",
+    "@henrycatalinismith/11tyhype": "^0.0.4",
+    "@henrycatalinismith/11tysass": "^2.0.1",
+    "@henrycatalinismith/11tysnap": "^0.0.10",
+    "@henrycatalinismith/11tytype": "^0.0.5",
+    "@henrycatalinismith/elements": "^0.0.5",
+    "@henrycatalinismith/picknmix": "^0.0.20",
     "@types/node": "^15.3.0",
     "@types/react": "^17.0.5",
     "clean-css": "^5.1.2",

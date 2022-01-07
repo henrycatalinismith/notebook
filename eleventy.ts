@@ -1,8 +1,8 @@
 import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight"
-import { rehypePlugin } from "@hendotcat/11tyhype"
-import { sassPlugin } from "@hendotcat/11tysass"
-import { reactPlugin } from "@hendotcat/11tysnap"
-import { EleventyCollection, EleventyLayout } from "@hendotcat/11tytype"
+import { rehypePlugin } from "@henrycatalinismith/11tyhype"
+import { sassPlugin } from "@henrycatalinismith/11tysass"
+import { reactPlugin } from "@henrycatalinismith/11tysnap"
+import { EleventyCollection, EleventyLayout } from "@henrycatalinismith/11tytype"
 import rehypeMinifyWhitespace from "rehype-minify-whitespace"
 import rehypeUrls from "rehype-urls"
 
