@@ -1,5 +1,5 @@
 ---
-name: circ
+title: circ
 description: A C implementation of Bresenham's circle algorithm
 ---
 
