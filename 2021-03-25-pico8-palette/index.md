@@ -1,6 +1,8 @@
 ---
 title: pico8 palette
 description: The original 16 colors of the PICO-8 fantasy console
+permalink: /pico8-palette/
+layout: note
 ---
 
 <style>

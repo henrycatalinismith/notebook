@@ -1,0 +1,10 @@
+{
+ "name": "@henrycatalinismith/notebook",
+ "dependencies": {
+  "@11ty/eleventy": "^1.0.1"
+  },
+ "scripts": {
+  "build": "eleventy",
+  "start": "eleventy --serve"
+ }
+}

@@ -1,6 +1,8 @@
 ---
 title: circ
 description: A C implementation of Bresenham's circle algorithm
+permalink: /circ/
+layout: note
 ---
 
 ```c

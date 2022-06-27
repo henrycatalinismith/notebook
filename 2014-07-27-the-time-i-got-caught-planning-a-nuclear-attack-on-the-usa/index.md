@@ -1,6 +1,8 @@
 ---
 title: The time I got caught planning a nuclear attack on the USA
 description:
+permalink: /the-time-i-got-caught-planning-a-nuclear-attack-on-the-usa/
+layout: note
 ---
 
 I missed a phone call at work from my landlord this week. Landlord phone calls are scary. “Our rent payment probably hasn’t gone out or something”, I began to worry. I tend to panic quickly. “Shit, I bet it failed because our bank account is empty. Somebody’s gotten in and emptied out all our money. Fuck.” Fearing the worst, I phoned back straight away to check what was up.
