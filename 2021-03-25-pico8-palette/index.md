@@ -8,7 +8,7 @@ layout: note
 <style>
 table {
  border-collapse: collapse;
- width: var(--column);
+ width: 100%;
 }
 
 td {
