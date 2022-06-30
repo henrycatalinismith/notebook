@@ -19,6 +19,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({
    [`${dirent.name}/*.gif`]: slug,
    [`${dirent.name}/*.jpg`]: slug,
+   [`${dirent.name}/*.mp4`]: slug,
    [`${dirent.name}/*.png`]: slug,
   });
 
