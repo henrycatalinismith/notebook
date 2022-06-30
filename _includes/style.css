@@ -73,8 +73,27 @@ article + article {
  margin-top: 64px;
 }
 
-p {
+p, ul, ol, code {
  font-size: var(--f1);
+}
+
+p > a > code,
+p > code {
+ font-family: Menlo, monospace;
+ font-size: 0.9em;
+}
+
+time {
+ display: block;
+ margin: 8rem 0;
+ width: var(--width);
+ font-size: var(--f1);
+ color: mediumvioletred;
+ font-family: Menlo, monospace;
+ text-align: center;
+}
+
+p {
  line-height: 1.5em;
 }
 

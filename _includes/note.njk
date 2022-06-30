@@ -27,7 +27,13 @@
    <h1>
     {{ title }}
    </h1>
+   <aside>
    {{ content | safe }}
+   <footer>
+    <time datetime="{{ date | ymd }}">
+     {{ date | ymd }}
+    </time>
+   </footer>
   </main>
  </body>
 </html>

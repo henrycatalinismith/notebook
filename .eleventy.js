@@ -1,4 +1,5 @@
 const fs = require("fs")
+const { DateTime } = require("luxon")
 
 module.exports = function(eleventyConfig) {
  const dir = fs.opendirSync("./")
@@ -25,4 +26,9 @@ module.exports = function(eleventyConfig) {
 
   dirent = dir.readSync();
  }
+
+ eleventyConfig.addFilter(
+  "ymd", (date) => {
+   return DateTime.fromJSDate(date).toISODate()
+ })
 }
