@@ -1,0 +1,85 @@
+
+:root {
+ --f1: clamp(1rem, calc(1rem + (100vw - 16rem) / 64), 2rem);
+ --f2: calc(var(--f1) * 1.25);
+ --f3: calc(var(--f1) * 1.5);
+ --f4: calc(var(--f1) * 2);
+ --margin: calc(
+  1rem - clamp(
+   0rem,
+   calc((100vw - 64rem) / 8),
+   1rem
+  )
+ );
+ --width: min(
+  100vw,
+  64rem
+ );
+ --burst: calc(
+  clamp(
+   0rem,
+   calc((100vw - 32rem) / 1),
+   4rem
+  ) + var(--width)
+ );
+}
+
+html {
+ box-sizing: border-box;
+}
+
+*, *:before, *:after {
+ box-sizing: inherit;
+}
+
+body {
+ background-color: ghostwhite;
+ color: darkslategray;
+ display: flex;
+ font-family: Charter, serif;
+ justify-content: center;
+ margin: 0;
+}
+
+a[href] {
+ color: royalblue;
+}
+
+h1 {
+ font-size: var(--f4);
+ margin: 32px 0 16px 0;
+}
+
+h2 {
+ font-size: var(--f3);
+ margin: 32px 0 0 0;
+}
+
+article > h2 + p {
+ margin-top: 0;
+}
+
+h1, h2 {
+ color: deeppink;
+ font-family: "Hoefler Text", serif;
+}
+
+
+main {
+ max-width: var(--width);
+}
+
+article + article {
+ margin-top: 64px;
+}
+
+p {
+ font-size: var(--f1);
+ line-height: 1.5em;
+}
+
+h1, h2, p {
+ margin-left: var(--margin);
+ margin-right: var(--margin);
+}
+
