@@ -1,6 +1,9 @@
 ---
 title: circ
-description: A C implementation of Bresenham's circle algorithm
+description: |
+  A C implementation of Bresenham's circle algorithm.
+  I'm tired of having to dig this out of Google so I'm keeping a copy of it here from now on.
+date: 2019-04-20
 permalink: /circ/
 layout: note
 ---

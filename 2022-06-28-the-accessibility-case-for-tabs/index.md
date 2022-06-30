@@ -1,6 +1,7 @@
 ---
 title: The accessibility case for tabs
 description: Maybe it’s not a meaningless disagreement about aesthetics after all
+date: 2022-06-28
 permalink: /the-accessibility-case-for-tabs/
 layout: note
 ---

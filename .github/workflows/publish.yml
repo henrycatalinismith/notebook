@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - run: yarn
-      - run: yarn build
+      - run: yarn build --pathprefix /notebook/
 
       - uses: peaceiris/actions-gh-pages@v3
         with:

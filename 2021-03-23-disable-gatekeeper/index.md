@@ -1,6 +1,8 @@
 ---
-title: disable gatekeeper
-description: Run unsigned apps on your mac
+title: Disable Gatekeeper
+description: |
+ This is the command that lets you run unsigned apps on your Mac.
+date: 2021-03-23
 permalink: /disable-gatekeeper/
 layout: note
 ---
