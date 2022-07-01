@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8">
+  <meta
+   name="viewport" 
+   content="width=device-width, initial-scale=1.0"
+  />
+  <meta
+   name="og:title" 
+   content="Apple pie from scratch"
+  />
+  <meta
+   name="og:description" 
+   content="Learning about 2D graphics programming by rendering a cosy
+little universe.
+"
+  />
+  <title>Apple pie from scratch</title>
+  
+  <style>
+   
+   
+:root {
+ --f1: clamp(1rem, calc(1rem + (100vw - 16rem) / 64), 2rem);
+ --f2: calc(var(--f1) * 1.25);
+ --f3: calc(var(--f1) * 1.5);
+ --f4: calc(var(--f1) * 2);
+ --margin: calc(
+  1rem - clamp(
+   0rem,
+   calc((100vw - 64rem) / 8),
+   1rem
+  )
+ );
+ --width: min(
+  100vw,
+  64rem
+ );
+ --burst: calc(
+  clamp(
+   0rem,
+   calc((100vw - 32rem) / 1),
+   4rem
+  ) + var(--width)
+ );
+}
+
+html {
+ box-sizing: border-box;
+}
+
+*, *:before, *:after {
+ box-sizing: inherit;
+}
+
+body {
+ background-color: ghostwhite;
+ color: darkslategray;
+ display: flex;
+ font-family: Charter, serif;
+ justify-content: center;
+ margin: 0;
+}
+
+a[href] {
+ color: royalblue;
+}
+
+h1 {
+ font-size: var(--f4);
+ margin: 32px 0 16px 0;
+}
+
+h2 {
+ font-size: var(--f3);
+ margin: 32px 0 0 0;
+}
+
+article > h2 + p {
+ margin-top: 0;
+}
+
+h1, h2 {
+ color: deeppink;
+ font-family: "Hoefler Text", serif;
+}
+
+
+main {
+ max-width: var(--width);
+}
+
+article + article {
+ margin-top: 64px;
+}
+
+p, ul, ol, code {
+ font-size: var(--f1);
+}
+
+p > a > code,
+p > code {
+ font-family: Menlo, monospace;
+ font-size: 0.9em;
+}
+
+time {
+ display: block;
+ margin: 8rem 0;
+ width: var(--width);
+ font-size: var(--f1);
+ color: mediumvioletred;
+ font-family: Menlo, monospace;
+ text-align: center;
+}
+
+p {
+ line-height: 1.5em;
+}
+
+h1, h2, p {
+ margin-left: var(--margin);
+ margin-right: var(--margin);
+}
+
+pre {
+ background-color: lavenderblush;
+ box-shadow: 0 0 0 100vmax lavenderblush;
+ clip-path: inset(0 -100vmax);
+ max-width: 100vw;
+ overflow-x: auto;
+ padding: 1rem;
+}
+
+pre > code {
+ color: firebrick;
+ font-size: max(1rem, calc(var(--f1) * 0.75));
+}
+
+p > img,
+p > video {
+ max-width: 100vw;
+ width: 100%;
+ margin-left: calc(0rem - var(--margin));
+ margin-right: calc(0rem - var(--margin));
+}
+
+  
+  </style>
+ </head>
+ <body>
+  <main>
+   <article itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 itemprop="name">
+     Apple pie from scratch
+    </h1>
+    <p>This is a quick write-up of my solution to one of the first problems I bumped into in my latest project.
+I’m building a JavaScript model of the solar system, which in the end will hopefully feature all the planets orbiting the Sun according to some approximation of Newtonian gravity.</p>
+<p>The problem arose because it’s easier to implement the equations if your data model uses SI units: meters, kilograms and seconds.
+Plus, if you adopt a nice convention like SI units, it makes the code so much more readable.
+I find names like distanceInKm or massInKg super ugly.
+It’s nicer if you can use distance and mass and just infer the units from the convention.</p>
+<pre><code class="language-javascript">class Planet {
+  constructor ({ mass, position, radius }) {
+    this.mass = mass;
+    this.position = position; // { x, y }
+    this.radius = radius;
+  }
+}
+</code></pre>
+<p>This is lovely, but the CanvasRenderingContext2D API works in pixels.
+Take it or leave it.
+So the code in charge of rendering planets needs to know how to convert between meters and pixels.</p>
+<p>It’s the kind of problem that’s tempting to sort of hack your way through.
+Just keep throwing code at the wall and eventually something will stick.
+Easy enough, but the result is usually not great.
+It’s bad enough not understanding your own code a few weeks after writing it.
+Not understanding it while you’re still writing it is just… no fun.</p>
+<p>So I made a cup of tea, cleared a whiteboard, and had a bit of a think.
+The resulting diagram is a bit incomprehensible, but I sometimes think it’d be nice if people were more open about how lost they get with even simple stuff like this, so here it is.</p>
+<p>The gist of the solution is to have a scale property somewhere, denoting the conversion rate between pixels and meters.
+Next, I needed there to be a “thing” in my system to actually own that property and apply it.
+The name I settled on for that “thing” was Viewport.</p>
+<p>The Viewport needs to a few things to do its job.
+It needs that scale value, for starters.
+It needs a reference to the rendering context, too.
+And I figured it also needs to know which part of the universe it’s centered on, which I pass in as an object called center with an x and a y property.
+Because x and y are spatial values, you can just assume they’re in meters. See how nice that is?</p>
+<pre><code class="language-javascript">class Viewport {
+  constructor({ center, context, scale }) {
+    this.center = center; // { x, y }
+    this.context = context;
+    this.scale = scale;
+  }
+}
+</code></pre>
+<p>The last thing that’s missing is a Viewport method to render planets.
+Rendering circles is nice and simple because it’s part of the browser API, so that’s a freebie.
+What’s less simple is that I’ve designed the Viewport to accept the coordinates of its center point in meters, whereas the built-in arc method expects the coordinates of the circle in pixels from the top-left corner.</p>
+<p>This is important, because I need it to be easy to center the viewport on a given planet.
+I want it to be as simple as viewport.center = planet.position.
+As usual, the price of simplicity somewhere is complexity elsewhere.</p>
+<p>Converting between those two points is a two-step calculation.
+First, you have to calculate the position of the top-left pixel of the canvas in imaginary space meters.
+Then you subtract the coordinates of that position from the coordinates of the planet, and multiply the results by the scale property from earlier.
+This gives you the pixel position of the planet within the canvas.
+The resulting code is really heavy on arithmetic and took a while to get right.</p>
+<pre><code class="language-javascript">drawPlanet (planet) {
+  const { width, height } = this.context.canvas;
+  const topLeft = new Point(
+    this.center.x - ((width / 2) * (1 / this.scale)),
+    this.center.y - ((height / 2) * (1 / this.scale))
+  );
+
+  this.context.fillStyle = planet.color;
+  this.context.beginPath();
+
+  this.context.arc(
+    (planet.position.x - topLeft.x) * this.scale,
+    (planet.position.y - topLeft.y) * this.scale,
+    planet.radius * this.scale,
+    0,
+    Math.PI * 2
+  );
+
+  this.context.closePath();
+  this.context.fill();
+}
+</code></pre>
+<p>With that in place, I now have a working graphical layer that understands how to render my SI units data model onto a 2D canvas element.</p>
+<p>It’s a really fundamental part of the system, so you don’t end up with much to show for all the effort, but I did manage to squeeze one cool thing out of it.
+By gradually shrinking the value of the scale property, I can generate a “flying backwards through space” effect.
+Check it out.
+Right at the very end you can see the Moon whizz by on the right once we’re far enough from Earth.</p>
+<video src="zoom.mp4" title="2D earth fading into the distance as the camera moves backwards" controls playsinline>
+<p>Now that the basics are in place to display what’s going on, the next step is to get everything moving.
+Right now I’m still struggling to make gravity work right.
+It’s a lot harder than this was.</p>
+
+    <footer>
+     <time datetime="2015-10-29"  itemprop="datePublished">
+      2015-10-29
+     </time>
+    </footer>
+   </article>
+  </main>
+ </body>
+</html>

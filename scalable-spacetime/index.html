@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8">
+  <meta
+   name="viewport" 
+   content="width=device-width, initial-scale=1.0"
+  />
+  <meta
+   name="og:title" 
+   content="Scalable spacetime"
+  />
+  <meta
+   name="og:description" 
+   content="Thinking fourth-dimensionally."
+  />
+  <title>Scalable spacetime</title>
+  
+  <style>
+   
+   
+:root {
+ --f1: clamp(1rem, calc(1rem + (100vw - 16rem) / 64), 2rem);
+ --f2: calc(var(--f1) * 1.25);
+ --f3: calc(var(--f1) * 1.5);
+ --f4: calc(var(--f1) * 2);
+ --margin: calc(
+  1rem - clamp(
+   0rem,
+   calc((100vw - 64rem) / 8),
+   1rem
+  )
+ );
+ --width: min(
+  100vw,
+  64rem
+ );
+ --burst: calc(
+  clamp(
+   0rem,
+   calc((100vw - 32rem) / 1),
+   4rem
+  ) + var(--width)
+ );
+}
+
+html {
+ box-sizing: border-box;
+}
+
+*, *:before, *:after {
+ box-sizing: inherit;
+}
+
+body {
+ background-color: ghostwhite;
+ color: darkslategray;
+ display: flex;
+ font-family: Charter, serif;
+ justify-content: center;
+ margin: 0;
+}
+
+a[href] {
+ color: royalblue;
+}
+
+h1 {
+ font-size: var(--f4);
+ margin: 32px 0 16px 0;
+}
+
+h2 {
+ font-size: var(--f3);
+ margin: 32px 0 0 0;
+}
+
+article > h2 + p {
+ margin-top: 0;
+}
+
+h1, h2 {
+ color: deeppink;
+ font-family: "Hoefler Text", serif;
+}
+
+
+main {
+ max-width: var(--width);
+}
+
+article + article {
+ margin-top: 64px;
+}
+
+p, ul, ol, code {
+ font-size: var(--f1);
+}
+
+p > a > code,
+p > code {
+ font-family: Menlo, monospace;
+ font-size: 0.9em;
+}
+
+time {
+ display: block;
+ margin: 8rem 0;
+ width: var(--width);
+ font-size: var(--f1);
+ color: mediumvioletred;
+ font-family: Menlo, monospace;
+ text-align: center;
+}
+
+p {
+ line-height: 1.5em;
+}
+
+h1, h2, p {
+ margin-left: var(--margin);
+ margin-right: var(--margin);
+}
+
+pre {
+ background-color: lavenderblush;
+ box-shadow: 0 0 0 100vmax lavenderblush;
+ clip-path: inset(0 -100vmax);
+ max-width: 100vw;
+ overflow-x: auto;
+ padding: 1rem;
+}
+
+pre > code {
+ color: firebrick;
+ font-size: max(1rem, calc(var(--f1) * 0.75));
+}
+
+p > img,
+p > video {
+ max-width: 100vw;
+ width: 100%;
+ margin-left: calc(0rem - var(--margin));
+ margin-right: calc(0rem - var(--margin));
+}
+
+  
+  </style>
+ </head>
+ <body>
+  <main>
+   <article itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 itemprop="name">
+     Scalable spacetime
+    </h1>
+    <p>After building last week’s Solar System renderer, I was excited to move on to the fun stuff and see some planets moving around.
+I rushed on into implementing motion, which on the face of it is pretty simple.
+If Earth is moving along at 30,000m/s, for example, then you can just add its velocity to its current position once per second and get its new location.</p>
+<p><img
+ src="simple.png"
+ alt="
+  Two blue circles separated horizontally by an arrow pointing right labelled 30,000m.
+  The circle on the left is labelled ‘0 seconds’ and the one on the right is labelled ‘1 second later'.
+ "
+/></p>
+<p>The code for this is an easy read. I threw together a little Motion class. Elsewhere, it’s instantiated, and the affect method is invoked repeatedly. So if Earth has a vector of 30000 horizontally and 0 vertically, then each tick of this method counts as one second of motion in my imaginary 2D universe, and it moves the earth along by 30km each time.</p>
+<pre><code class="language-javascript">class Motion {
+  affect (universe) {
+    universe.planets.map((planet) =&gt; {
+      planet.position.add(planet.vector);
+    });
+  }
+}
+</code></pre>
+<p>This worked on my first try, which as usual, meant I’d barely broken the surface of the problem.
+To give you a sense of perspective, here’s ten seconds of motion in plain old 1:1 time.
+It’s not exactly riveting.
+Earth’s 12,000km diameter makes 30km/s look slow.
+Honestly, I kind of thought it’d be a bit quicker, even at 1:1 scale.
+Remember this next time somebody’s talking about how we’re “hurtling through space on a giant rock”.
+It barely moves at all in this clip. Hurtling my arse.</p>
+<p><video
+ src="slow.mp4" 
+ title="2D earth moving almost imperceptibly slowly."
+ controls
+ playsinline>
+</video></p>
+<p>No way I’m waiting an entire real-life year to see my simulated Earth make its way around the Sun once.
+What I needed was a way to speed up time.</p>
+<p>Something I quickly realised was that this was more or less the same problem as the viewport scaling, just dressed up a little differently.
+The symmetry carries over into the solution, too, because just like in the graphical layer, I ended up creating a scale property to represent the conversion rate.
+This time, it was for converting between real life seconds and imaginary space seconds.
+So a scale of 1 gives you one second per real second, and a scale of 60 gives you a minute per real second, and so on.</p>
+<p>The timing code is too involved (💤) to show a decent summarised version here.
+The gist of it is that for each tick, it multiplies the real life tick interval length by the scale factor, and passes that to any physics calculations so that they can multiply their results by that.
+For motion, that just means multiplying the planet’s vector by the number of seconds elapsed before adding it to the planet’s position.</p>
+<pre><code class="language-javascript">class Motion {
+  affect (universe, seconds) {
+    universe.planets.map((planet) =&gt; {
+      planet.position.add(planet.vector.scale(seconds));
+    });
+  }
+}
+</code></pre>
+<p>Now here’s the Earth again, this time with scale pumped up to 600.
+That’s 10 imaginary space minutes for every real world second.
+If you’re good at maths you might notice that this video is 18 seconds long, and the timer doesn’t make it to 3 hours like it should at this scale.
+But then if you were paying that kind of attention you’d have noticed that only 10 seconds pass in the 12 second video earlier! Still got some minor issues to iron out there 😇</p>
+<p><video
+ src="fast.mp4" 
+ title="2D earth moving much faster."
+ controls
+ playsinline>
+</video></p>
+<p>This is going great so far. It isn’t perfect, but I’m reasonably pleased with it. Getting the foundational stuff like graphics and timing right makes it so much more enjoyable to build the complicated stuff on top.</p>
+
+    <footer>
+     <time datetime="2015-11-02"  itemprop="datePublished">
+      2015-11-02
+     </time>
+    </footer>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8">
+  <meta
+   name="viewport" 
+   content="width=device-width, initial-scale=1.0"
+  />
+  <meta
+   name="og:title" 
+   content="The accessibility case for tabs"
+  />
+  <meta
+   name="og:description" 
+   content="Maybe it’s not a meaningless disagreement about aesthetics after all"
+  />
+  <title>The accessibility case for tabs</title>
+  
+  <style>
+   
+   
+:root {
+ --f1: clamp(1rem, calc(1rem + (100vw - 16rem) / 64), 2rem);
+ --f2: calc(var(--f1) * 1.25);
+ --f3: calc(var(--f1) * 1.5);
+ --f4: calc(var(--f1) * 2);
+ --margin: calc(
+  1rem - clamp(
+   0rem,
+   calc((100vw - 64rem) / 8),
+   1rem
+  )
+ );
+ --width: min(
+  100vw,
+  64rem
+ );
+ --burst: calc(
+  clamp(
+   0rem,
+   calc((100vw - 32rem) / 1),
+   4rem
+  ) + var(--width)
+ );
+}
+
+html {
+ box-sizing: border-box;
+}
+
+*, *:before, *:after {
+ box-sizing: inherit;
+}
+
+body {
+ background-color: ghostwhite;
+ color: darkslategray;
+ display: flex;
+ font-family: Charter, serif;
+ justify-content: center;
+ margin: 0;
+}
+
+a[href] {
+ color: royalblue;
+}
+
+h1 {
+ font-size: var(--f4);
+ margin: 32px 0 16px 0;
+}
+
+h2 {
+ font-size: var(--f3);
+ margin: 32px 0 0 0;
+}
+
+article > h2 + p {
+ margin-top: 0;
+}
+
+h1, h2 {
+ color: deeppink;
+ font-family: "Hoefler Text", serif;
+}
+
+
+main {
+ max-width: var(--width);
+}
+
+article + article {
+ margin-top: 64px;
+}
+
+p, ul, ol, code {
+ font-size: var(--f1);
+}
+
+p > a > code,
+p > code {
+ font-family: Menlo, monospace;
+ font-size: 0.9em;
+}
+
+time {
+ display: block;
+ margin: 8rem 0;
+ width: var(--width);
+ font-size: var(--f1);
+ color: mediumvioletred;
+ font-family: Menlo, monospace;
+ text-align: center;
+}
+
+p {
+ line-height: 1.5em;
+}
+
+h1, h2, p {
+ margin-left: var(--margin);
+ margin-right: var(--margin);
+}
+
+pre {
+ background-color: lavenderblush;
+ box-shadow: 0 0 0 100vmax lavenderblush;
+ clip-path: inset(0 -100vmax);
+ max-width: 100vw;
+ overflow-x: auto;
+ padding: 1rem;
+}
+
+pre > code {
+ color: firebrick;
+ font-size: max(1rem, calc(var(--f1) * 0.75));
+}
+
+p > img,
+p > video {
+ max-width: 100vw;
+ width: 100%;
+ margin-left: calc(0rem - var(--margin));
+ margin-right: calc(0rem - var(--margin));
+}
+
+  
+  </style>
+ </head>
+ <body>
+  <main>
+   <article itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 itemprop="name">
+     The accessibility case for tabs
+    </h1>
+    <p>The web development community standardized on indentation using spaces over the course of the 2010s.
+This norm is now being challenged.
+A <a href="https://github.com/prettier/prettier/issues/7475">GitHub thread about changing the most popular JavaScript code formatter to use tabs by default</a> has gone viral.
+Accessibility’s the issue at the center of the debate and it’s caught my imagination.
+How strong is the accessibility case for tabs anyway?</p>
+<h2>Universal design</h2>
+<p><a href="https://en.wikipedia.org/wiki/Universal_design">Universal Design</a> is a school of thought focused on designing things so that all people can benefit from them.
+Its second principle – Flexibility in Use – is relevant here.
+This principle is about accommodating a wide range of individual preferences and abilities.</p>
+<p>Moving walkways in airports are an example of this principle in the built environment.
+They’re helpful for many different body types and they even double as a time saver for travelers in a hurry.
+Captions on videos are an example from the software world.
+They’re essential for deaf or hard of hearing people; they’re useful in environments where listening isn’t practical; and they improve comprehension for less fluent speakers of the language in use.</p>
+<p>Using tabs for indentation is a textbook example of flexibility in use.
+It allows a developer with a visual impairment to crank up the indentation level to clarify the structure of their code.
+By reducing the number of cells used for whitespace on a <a href="https://en.wikipedia.org/wiki/Refreshable_braille_display">refreshable Braille display</a>, it enables a deafblind developer to read more code at once.
+And if you’re totally able-bodied you benefit from the flexibility too, as your pool of potential collaborators is larger as a result of it.</p>
+<h2>Accessibility is for everyone</h2>
+<p>If we're lucky, we survive long enough to become old.
+At around 40 years old, <a href="https://en.wikipedia.org/wiki/Presbyopia">presbyopia</a> kicks in and starts messing up your eyes' ability to focus.
+Then as you age further, more and more factors pile on top of that.
+Diabetes, for example, is correlated with age.
+<a href="https://www.cdc.gov/diabetes/managing/diabetes-vision-loss.html">Diabetic retinopathy</a> is the leading cause of blindness in working-age adults.
+According to one estimate, <a href="https://iovs.arvojournals.org/article.aspx?articleid=2127318">65% of visually impaired Americans are over 50 years old</a>.
+For blindness, that figure rises to 82%.</p>
+<p>Our industry's age discrimination is notorious.
+According to StackOverflow, <a href="https://survey.stackoverflow.co/2022/#demographics-age-prof">the proportion of professional developers aged 45 or over</a> was just 10.9% in 2022.
+WebAIM's <a href="https://webaim.org/projects/million/#wcag">analysis of the top 1,000,000 websites</a> suggests that we're not an industry that cares very much about accessibility either.
+Perhaps some enlightened self-interest regarding our own future career prospects could be a way for some of us to bridge that empathy gap.</p>
+<p>In my case, I became a parent a couple of years ago and stopped having infinite free time to stare at code on computer screens.
+In order to keep my creativity flowing during housework and supermarket trips, I sometimes peek at half-finished code on my phone.
+This has led me to optimize my code formatting for mobile reading, which includes using only one space for indentation.
+If we – as a community – had standardized on tabs instead of spaces, I could fulfill that need without changing the code itself.</p>
+<h2>It's all upside</h2>
+<p>After spending some time poking around the various discussions about this both past and present, a few themes have emerged.
+Anecdotes about <a href="https://www.reddit.com/r/javascript/comments/c8drjo/nobody_talks_about_the_real_reason_to_use_tabs/">the accessibility benefits of indentation using tabs</a> are easy to find.
+There are also plenty of people with disabilities who say they don't really mind either way.
+What I'm not finding is examples where someone's saying “I’ll be excluded if you switch to tabs! Please don’t!”.</p>
+<p>So there does seem to be a strong case for this.
+Change in general is always exciting and this one could genuinely help people for real.
+I'm crossing my fingers for it to become a full-blown bandwagon thing now.
+My best-case scenario is if someone like GitHub jumps on board.
+They could really boost this by shipping some integrated migration tooling.
+If you're reading this over there, go make it happen!</p>
+
+    <footer>
+     <time datetime="2022-06-28"  itemprop="datePublished">
+      2022-06-28
+     </time>
+    </footer>
+   </article>
+  </main>
+ </body>
+</html>

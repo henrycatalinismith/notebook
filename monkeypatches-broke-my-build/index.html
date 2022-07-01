@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8">
+  <meta
+   name="viewport" 
+   content="width=device-width, initial-scale=1.0"
+  />
+  <meta
+   name="og:title" 
+   content="Monkeypatches broke my build"
+  />
+  <meta
+   name="og:description" 
+   content="A couple of months ago I wrote a little about the general awkwardness resulting from monkey patching.
+I&#39;ve been burnt worse since then
+"
+  />
+  <title>Monkeypatches broke my build</title>
+  
+  <style>
+   
+   
+:root {
+ --f1: clamp(1rem, calc(1rem + (100vw - 16rem) / 64), 2rem);
+ --f2: calc(var(--f1) * 1.25);
+ --f3: calc(var(--f1) * 1.5);
+ --f4: calc(var(--f1) * 2);
+ --margin: calc(
+  1rem - clamp(
+   0rem,
+   calc((100vw - 64rem) / 8),
+   1rem
+  )
+ );
+ --width: min(
+  100vw,
+  64rem
+ );
+ --burst: calc(
+  clamp(
+   0rem,
+   calc((100vw - 32rem) / 1),
+   4rem
+  ) + var(--width)
+ );
+}
+
+html {
+ box-sizing: border-box;
+}
+
+*, *:before, *:after {
+ box-sizing: inherit;
+}
+
+body {
+ background-color: ghostwhite;
+ color: darkslategray;
+ display: flex;
+ font-family: Charter, serif;
+ justify-content: center;
+ margin: 0;
+}
+
+a[href] {
+ color: royalblue;
+}
+
+h1 {
+ font-size: var(--f4);
+ margin: 32px 0 16px 0;
+}
+
+h2 {
+ font-size: var(--f3);
+ margin: 32px 0 0 0;
+}
+
+article > h2 + p {
+ margin-top: 0;
+}
+
+h1, h2 {
+ color: deeppink;
+ font-family: "Hoefler Text", serif;
+}
+
+
+main {
+ max-width: var(--width);
+}
+
+article + article {
+ margin-top: 64px;
+}
+
+p, ul, ol, code {
+ font-size: var(--f1);
+}
+
+p > a > code,
+p > code {
+ font-family: Menlo, monospace;
+ font-size: 0.9em;
+}
+
+time {
+ display: block;
+ margin: 8rem 0;
+ width: var(--width);
+ font-size: var(--f1);
+ color: mediumvioletred;
+ font-family: Menlo, monospace;
+ text-align: center;
+}
+
+p {
+ line-height: 1.5em;
+}
+
+h1, h2, p {
+ margin-left: var(--margin);
+ margin-right: var(--margin);
+}
+
+pre {
+ background-color: lavenderblush;
+ box-shadow: 0 0 0 100vmax lavenderblush;
+ clip-path: inset(0 -100vmax);
+ max-width: 100vw;
+ overflow-x: auto;
+ padding: 1rem;
+}
+
+pre > code {
+ color: firebrick;
+ font-size: max(1rem, calc(var(--f1) * 0.75));
+}
+
+p > img,
+p > video {
+ max-width: 100vw;
+ width: 100%;
+ margin-left: calc(0rem - var(--margin));
+ margin-right: calc(0rem - var(--margin));
+}
+
+  
+  </style>
+ </head>
+ <body>
+  <main>
+   <article itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 itemprop="name">
+     Monkeypatches broke my build
+    </h1>
+    <p>The prevalence of monkey patching as a Ruby development practice is a complete pain in the arse.
+Sure, some of Ruby's expressiveness as a tool for building DSLs is derived from the ability to monkey patch things like 10.days.ago into the core classes.
+Admittedly, I occasionally indulge my sweet tooth at the Rails all-you-can-eat syntactic sugar buffet.
+But it's not my favourite approach to software development by a long shot.</p>
+<p>A couple of months ago I wrote a little about the general awkwardness resulting from monkey patching.
+I've been burnt worse since then, and now I have a concrete example which I think supports my point of view quite strongly.</p>
+<h2>Coveralls/Colorized/Colored Clusterfuck</h2>
+<p>Today I wanted to add a service called Coveralls to ppl's build process.
+Coveralls measures test coverage, provides statistics about test coverage over time, and supplies a dynamic README badge for advertising your project's commitment to thorough testing.
+It's a perfect fit for a project like ppl, so I was keen to get it running.</p>
+<p>Take a quick look at the commit which added Coveralls to ppl.
+It's a tiny commit, and seemingly harmless.
+To my great surprise, it broke the build on Travis CI.
+And which test did it break?</p>
+<pre><code>Failures:
+
+1) Ppl::Format::Table#to_s should colorize columns if requested
+    Failure/Error: @table.to_s.should eq &quot;\e[31m12345  \e[0m\e[33mJohn Doe  \e[0m\e[34mjdoe@example.org  \e[0m&quot;
+
+    expected: &quot;\e[31m12345  \e[0m\e[33mJohn Doe  \e[0m\e[34mjdoe@example.org  \e[0m&quot;
+         got: &quot;\e[0;31;49m12345  \e[0m\e[0;33;49mJohn Doe  \e[0m\e[0;34;49mjdoe@example.org  \e[0m&quot;
+
+    (compared using ==)
+# ./spec/ppl/format/table_spec.rb:80:in `block (3 levels) in &lt;top (required)&gt;'
+</code></pre>
+<p>The design of that test is actually a bit of a minor mistake on my part.
+The color adapter probably ought to be mocked out, as this test isn't really about the ANSI color escape codes themselves.</p>
+<p>On the plus side, this has exposed something very interesting: the escape codes surrounding the strings have changed subtly.
+And why is that? Because the Coveralls gem depends on a string colorization library called colorize.
+When Coveralls is loaded by the line require &quot;coveralls&quot;, colorize's String class monkey patches overwrite the ones previously made by Ppl::Adapter::Color::Colored when it loads the colored gem.</p>
+<h2>What. The. Fuck.</h2>
+<p>Did you catch that? My project's test suite failed because one of Coveralls' dependencies changed the behaviour of Ruby's core String class in a way that overwrites changes previously made to that class by a dependency of ppl.
+This is absolute insanity.
+It's not even anybody's fault, but rather an inevitable consequence of monkey patching.</p>
+<p>I'm quite new to Ruby, so I have to rely on others for perspective on this approach to Ruby development.
+Judging by Avdi Grimm's 2008 post, &quot;Monkeypatching is Destroying Ruby&quot;, it was considered quite hip five years ago.
+Here we are in 2013, and installing a code coverage tool has literally changed the output of my code.
+It's pretty clear that Avdi was right, anyway.</p>
+<p>Refinements look set to right some of these wrongs, but Ruby 2.0 is still warm from the oven, and projects like ppl will probably be supporting 1.9 for a long time to come.
+In the meantime, I've decided to start treating monkey patches more or less like a code smell.
+Not because they are necessarily fragile in themselves, but because of the fragility they so inscrutably create in other code.</p>
+
+    <footer>
+     <time datetime="2013-04-25"  itemprop="datePublished">
+      2013-04-25
+     </time>
+    </footer>
+   </article>
+  </main>
+ </body>
+</html>

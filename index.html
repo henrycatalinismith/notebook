@@ -1,0 +1,293 @@
+<!doctype html>
+
+<html lang="en">
+ <head>
+  <meta charset="utf-8">
+  <meta
+   name="viewport" 
+   content="width=device-width, initial-scale=1.0"
+  />
+  <meta
+   name="og:title" 
+   content="some writing"
+  />
+  <meta
+   name="og:description" 
+   content="some writing"
+  />
+  <title>notebook</title>
+  
+  <style>
+   
+   
+:root {
+ --f1: clamp(1rem, calc(1rem + (100vw - 16rem) / 64), 2rem);
+ --f2: calc(var(--f1) * 1.25);
+ --f3: calc(var(--f1) * 1.5);
+ --f4: calc(var(--f1) * 2);
+ --margin: calc(
+  1rem - clamp(
+   0rem,
+   calc((100vw - 64rem) / 8),
+   1rem
+  )
+ );
+ --width: min(
+  100vw,
+  64rem
+ );
+ --burst: calc(
+  clamp(
+   0rem,
+   calc((100vw - 32rem) / 1),
+   4rem
+  ) + var(--width)
+ );
+}
+
+html {
+ box-sizing: border-box;
+}
+
+*, *:before, *:after {
+ box-sizing: inherit;
+}
+
+body {
+ background-color: ghostwhite;
+ color: darkslategray;
+ display: flex;
+ font-family: Charter, serif;
+ justify-content: center;
+ margin: 0;
+}
+
+a[href] {
+ color: royalblue;
+}
+
+h1 {
+ font-size: var(--f4);
+ margin: 32px 0 16px 0;
+}
+
+h2 {
+ font-size: var(--f3);
+ margin: 32px 0 0 0;
+}
+
+article > h2 + p {
+ margin-top: 0;
+}
+
+h1, h2 {
+ color: deeppink;
+ font-family: "Hoefler Text", serif;
+}
+
+
+main {
+ max-width: var(--width);
+}
+
+article + article {
+ margin-top: 64px;
+}
+
+p, ul, ol, code {
+ font-size: var(--f1);
+}
+
+p > a > code,
+p > code {
+ font-family: Menlo, monospace;
+ font-size: 0.9em;
+}
+
+time {
+ display: block;
+ margin: 8rem 0;
+ width: var(--width);
+ font-size: var(--f1);
+ color: mediumvioletred;
+ font-family: Menlo, monospace;
+ text-align: center;
+}
+
+p {
+ line-height: 1.5em;
+}
+
+h1, h2, p {
+ margin-left: var(--margin);
+ margin-right: var(--margin);
+}
+
+pre {
+ background-color: lavenderblush;
+ box-shadow: 0 0 0 100vmax lavenderblush;
+ clip-path: inset(0 -100vmax);
+ max-width: 100vw;
+ overflow-x: auto;
+ padding: 1rem;
+}
+
+pre > code {
+ color: firebrick;
+ font-size: max(1rem, calc(var(--f1) * 0.75));
+}
+
+p > img,
+p > video {
+ max-width: 100vw;
+ width: 100%;
+ margin-left: calc(0rem - var(--margin));
+ margin-right: calc(0rem - var(--margin));
+}
+
+  
+  </style>
+ </head>
+ <body>
+  <main itemscope itemtype="http://schema.org/Blog">
+   <h1>
+    notebook
+   </h1>
+
+   <div><article itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+      <h2>
+       <a href="/notebook/the-accessibility-case-for-tabs/">
+        <span itemprop="headline name">
+         The accessibility case for tabs
+        </span>
+       </a>
+      </h2>
+      <p itemprop="description">
+       Maybe it’s not a meaningless disagreement about aesthetics after all
+      </p>
+     </article><article itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+      <h2>
+       <a href="/notebook/pico8-palette/">
+        <span itemprop="headline name">
+         PICO-8 palette
+        </span>
+       </a>
+      </h2>
+      <p itemprop="description">
+       The original 16 colors of the PICO-8 fantasy console
+      </p>
+     </article><article itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+      <h2>
+       <a href="/notebook/disable-gatekeeper/">
+        <span itemprop="headline name">
+         Disable Gatekeeper
+        </span>
+       </a>
+      </h2>
+      <p itemprop="description">
+       This is the command that lets you run unsigned apps on your Mac.
+
+      </p>
+     </article><article itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+      <h2>
+       <a href="/notebook/circ/">
+        <span itemprop="headline name">
+         circ
+        </span>
+       </a>
+      </h2>
+      <p itemprop="description">
+       A C implementation of Bresenham&#39;s circle algorithm.
+I&#39;m tired of having to dig this out of Google so I&#39;m keeping a copy of it here from now on.
+
+      </p>
+     </article><article itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+      <h2>
+       <a href="/notebook/lost-in-space/">
+        <span itemprop="headline name">
+         Lost in space
+        </span>
+       </a>
+      </h2>
+      <p itemprop="description">
+       Danger Will Robinson
+      </p>
+     </article><article itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+      <h2>
+       <a href="/notebook/scalable-spacetime/">
+        <span itemprop="headline name">
+         Scalable spacetime
+        </span>
+       </a>
+      </h2>
+      <p itemprop="description">
+       Thinking fourth-dimensionally.
+      </p>
+     </article><article itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+      <h2>
+       <a href="/notebook/apple-pie-from-scratch/">
+        <span itemprop="headline name">
+         Apple pie from scratch
+        </span>
+       </a>
+      </h2>
+      <p itemprop="description">
+       Learning about 2D graphics programming by rendering a cosy
+little universe.
+
+      </p>
+     </article><article itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+      <h2>
+       <a href="/notebook/not-planning-any-nuclear-attacks/">
+        <span itemprop="headline name">
+         I am not planning any nuclear attacks
+        </span>
+       </a>
+      </h2>
+      <p itemprop="description">
+       Here are my whiteboard designs.
+They&#39;re for a nuclear war videogame I&#39;m making.
+Please don&#39;t arrest me.
+
+      </p>
+     </article><article itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+      <h2>
+       <a href="/notebook/the-time-i-got-caught-planning-a-nuclear-attack-on-the-usa/">
+        <span itemprop="headline name">
+         The time I got caught planning a nuclear attack on the USA
+        </span>
+       </a>
+      </h2>
+      <p itemprop="description">
+       If you draw a map of the world on a whiteboard, a big red geodesic line from Moscow to Washington D.C., and a big red blast radius on top of D.C., then this is not something to leave lying around during a routine visual inspection by your landlord.
+
+      </p>
+     </article><article itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+      <h2>
+       <a href="/notebook/monkeypatches-broke-my-build/">
+        <span itemprop="headline name">
+         Monkeypatches broke my build
+        </span>
+       </a>
+      </h2>
+      <p itemprop="description">
+       A couple of months ago I wrote a little about the general awkwardness resulting from monkey patching.
+I&#39;ve been burnt worse since then
+
+      </p>
+     </article><article itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+      <h2>
+       <a href="/notebook/debian-squeeze-vagrant-base-box/">
+        <span itemprop="headline name">
+         Debian Squeeze Vagrant base box
+        </span>
+       </a>
+      </h2>
+      <p itemprop="description">
+       In an effort to suck less at dealing with all the various sysadmin-related tasks that come hand-in-hand with being a web developer, I&#39;m learning my way around Vagrant and Chef. 
+
+      </p>
+     </article></div>
+  </main>
+ </body>
+</html>
