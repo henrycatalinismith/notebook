@@ -38,8 +38,10 @@ eleventyExcludeFromCollections: true
     {%- for note in collections.all | reverse -%}
      <article itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
       <h2>
-       <a href="{{ note.data.permalink | url }}" itemprop="headline name">
-        {{ note.data.title }}
+       <a href="{{ note.data.permalink | url }}">
+        <span itemprop="headline name">
+         {{ note.data.title }}
+        </span>
        </a>
       </h2>
       <p itemprop="description">
