@@ -4,6 +4,7 @@ description: some writing
 eleventyExcludeFromCollections: true
 ---
 <!doctype html>
+
 <html lang="en">
  <head>
   <meta charset="utf-8">
@@ -28,20 +29,22 @@ eleventyExcludeFromCollections: true
   </style>
  </head>
  <body>
-  <main>
+  <main itemscope itemtype="http://schema.org/Blog">
    <h1>
     {{ title }}
    </h1>
 
    <div>
     {%- for note in collections.all | reverse -%}
-     <article>
+     <article itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
       <h2>
-       <a href="{{ note.data.permalink | url }}">
+       <a href="{{ note.data.permalink | url }}" itemprop="headline name">
         {{ note.data.title }}
        </a>
       </h2>
-      <p>{{ note.data.description }}</p>
+      <p itemprop="description">
+       {{ note.data.description }}
+      </p>
      </article>
     {%- endfor -%}
    </div>
